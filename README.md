@@ -1,6 +1,6 @@
 # lua_uniq
 64bit number uniq id generator
   
-    local uniq=require 'uniq'
+    local uniq=require 'uniq.c'
     uniq.init(0xFE)
     print(uniq.id(),uniq.str())
