@@ -1,5 +1,5 @@
 CC=gcc
-CFLAG=-std=gnu99 -O2 -Wall -Wextra -DLUA_COMPAT_5_2 -DLUA_USE_LINUX
+CFLAG=-std=gnu99 -O3 -Wall -Wextra
 
 SOURCE:=$(wildcard *.c)
 TARGET:=$(patsubst %.c,%.so,$(SOURCE))
@@ -11,6 +11,9 @@ all:$(TARGET)
 
 list:
 	@echo $(SOURCE)
+
+test:
+	lua uniq_test.lua
 
 clean:
 	rm $(TARGET)

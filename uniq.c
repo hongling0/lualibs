@@ -50,7 +50,7 @@ static inline const char* unit64_str(uint64_t u){
 }
 
 static int luauniq_init(lua_State* L){
-   main_id=(uint64_t)luaL_checkunsigned(L,1); 
+   main_id=(uint64_t)luaL_checkinteger(L,1); 
    return 0;
 }
 
@@ -64,7 +64,7 @@ static int luauniq_init(lua_State* L){
 static int luauniq_genid(lua_State*L){
     int64_t val;
     GEN_ID(val,L);
-    lua_pushunsigned(L,val);
+    lua_pushinteger(L,val);
     return 1;
 }
 
@@ -79,7 +79,8 @@ int luaopen_uniq(lua_State*L){
     static const struct luaL_Reg lib[]={
         {"init",luauniq_init},
         {"id",luauniq_genid},
-        {"str",luauniq_genstr}
+        {"str",luauniq_genstr},
+        {NULL,NULL}
     };
     luaL_newlib(L,lib);
     return 1;
