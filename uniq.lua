@@ -1,4 +1,4 @@
-local uniq=require 'uniq'
+local uniq=require 'uniq.c'
 
 for k,v in pairs(uniq) do
     print(k,v)

@@ -75,7 +75,7 @@ static int luauniq_genstr(lua_State*L){
     return 1;
 }
 
-int luaopen_uniq(lua_State*L){
+int luaopen_uniq_c(lua_State*L){
     static const struct luaL_Reg lib[]={
         {"init",luauniq_init},
         {"id",luauniq_genid},

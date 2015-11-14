@@ -12,9 +12,6 @@ all:$(TARGET)
 list:
 	@echo $(SOURCE)
 
-test:
-	lua uniq_test.lua
-
 clean:
 	rm $(TARGET)
 
