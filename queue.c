@@ -28,8 +28,8 @@ static inline void luaqueue_grown(lua_State* L,struct queue* q,int functab,int v
     lua_createtable(L,newsz,0);
     setreadonly(L,-1);
     for(i=q->read;i<q->write;i++){
-        lua_rawgeti(L,valuetbl,i&(q->size-1));
-        lua_rawseti(L,-2,i&(newsz-1));
+        lua_rawgeti(L,valuetbl,(i&(q->size-1))+1);
+        lua_rawseti(L,-2,(i&(newsz-1))+1);
     }
     lua_pushnil(L);
     while(lua_next(L,functab)){
@@ -45,7 +45,7 @@ static int luaqueue_push(lua_State* L){
 
     luaL_checkany(L,1);
     q=lua_touserdata(L,lua_upvalueindex(1));
-    lua_rawseti(L,lua_upvalueindex(2),q->write&(q->size-1));
+    lua_rawseti(L,lua_upvalueindex(2),(q->write&(q->size-1))+1);
     if((++q->write&(q->size-1))==(q->read&(q->size-1))){
         luaqueue_grown(L,q,lua_upvalueindex(3),lua_upvalueindex(2));
     }
@@ -60,7 +60,7 @@ static int luaqueue_head(lua_State* L){
         return 1;
     }
     lua_pushboolean(L,1);
-    lua_rawgeti(L,lua_upvalueindex(2),q->read&(q->size-1));
+    lua_rawgeti(L,lua_upvalueindex(2),(q->read&(q->size-1))+1);
     return 2;
 }
 
@@ -72,9 +72,9 @@ static int luaqueue_pop(lua_State* L){
         return 1;
     }
     lua_pushboolean(L,1);
-    lua_rawgeti(L,lua_upvalueindex(2),q->read&(q->size-1));
+    lua_rawgeti(L,lua_upvalueindex(2),(q->read&(q->size-1))+1);
     lua_pushnil(L);
-    lua_rawseti(L,lua_upvalueindex(2),q->read&(q->size-1));
+    lua_rawseti(L,lua_upvalueindex(2),(q->read&(q->size-1))+1);
     q->read++;
     return 2;
 }
