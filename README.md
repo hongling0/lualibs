@@ -20,3 +20,14 @@ lua fifo queue. can replace table.insert(t) table.remove((t,1)
     end
     local ok,val=q.head()
     local save=q.table()
+
+
+# lua string split
+    
+    local split=require 'split.c'
+    print(split.splitrow(",asd,asd,,,asdasd,asd,,,",",")
+    print(split.splitrow(",asd,asd,,,asdasd,asd,,,",",","i")
+    print('split table-------------------1')
+    for i,v in ipairs(split.split(",asd,asd,,,asdasd,asd,,,",",")) do print(k,v) end
+    print('split table-------------------2')
+    for i,v in ipairs(split.split(",asd,asd,,,asdasd,asd,,,",",""i")) do print(k,v) end
