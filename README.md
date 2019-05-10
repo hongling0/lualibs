@@ -10,7 +10,7 @@
 lua fifo queue. can replace table.insert(t) table.remove((t,1)
   
     local queue=require 'queue.c'
-    local q=queue.new(10000)
+    local q=queue()
     for i=1,100000 do
         q.push(i)
     end
@@ -19,7 +19,9 @@ lua fifo queue. can replace table.insert(t) table.remove((t,1)
         assert(ok)
     end
     local ok,val=q.head()
-    local save=q.table()
+    for i,v in pairs(q) do
+      print(i,v)
+    end
 
 
 # lua string split
