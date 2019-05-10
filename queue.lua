@@ -1,7 +1,5 @@
 return function()
-	local read=1
-	local write=1
-	local cap=64
+	local read,write,cap=1,1,64
 	local q={}
 	local function size()
 		local sz=write-read
@@ -27,13 +25,8 @@ return function()
 		if write>cap then write=1 end
 		if write==read then
 			local oq=q
-			local owrite=write
-			local oread=read
-			local ocap=cap
-
-			read=1
-			write=1
-			cap=ocap*2
+			local oread,owrite,ocap=read,write,cap
+			read,write,cap=1,1,ocap*2
 			q={}
 			for i=oread,ocap do
 				push(oq[i])
